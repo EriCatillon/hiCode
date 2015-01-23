@@ -102,6 +102,7 @@ class PostController extends \BaseController
                     else 'unpublish';
                 }
             ],
+            'thumbnail' => FILTER_SANITIZE_STRING  // type hidden value see assign massing
         ]);
 
         $validator = Validator::make($input, Post::$rules);
@@ -110,14 +111,15 @@ class PostController extends \BaseController
             return Redirect::back()->withInput()->withErrors($validator);
         } else {
 
-            $thumbnail = (Input::hasFile('thumbnail') && Input::file('thumbnail')->isValid()) ? $this->upload() : 'no image';
-
-            if(is_array($thumbnail))
+            if(Input::hasFile('thumbnail') && Input::file('thumbnail')->isValid()))
             {
-                return Redirect::back()->withInput()->withErrors($thumbnail);
-            }
+                $input['thumbnail'] = $this->upload() ;
 
-            $input['link_thumbnail']  = $thumbnail;
+                if(is_array($thumbnail))
+                {
+                    return Redirect::back()->withInput()->withErrors($thumbnail);
+                }
+            } 
 
             Post::findOrFail((int)$id)->update($input);
 
@@ -153,6 +155,8 @@ class PostController extends \BaseController
 
                 if (File::exists($fileName)) {
                     File::delete($fileName);
+                }else{
+                   // gestion des logs todo
                 }
             }
 
