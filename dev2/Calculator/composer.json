@@ -1,0 +1,21 @@
+{
+  "name": "MockFoo/MockFoo",
+  "description": "test PHPUnit Mock Foo",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tony",
+      "email": "antoine.lucsko@wanadoo.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": ["src/", "tests/"]
+
+    }
+  },
+  "require": {
+    "php": ">=5.4.0"
+  }
+}
