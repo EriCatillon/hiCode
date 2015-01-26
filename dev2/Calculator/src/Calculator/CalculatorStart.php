@@ -63,9 +63,13 @@ class CalculatorStart
         switch ($symbol) {
             case '+':
                 $this->result += $number;
+
                 break;
             case '-':
                 ($this->result==0)? $this->result=$number : $this->result-=$number;
+
+            case '*':
+                ($this->result==0)? $this->result=$number : $this->result*=$number;
         }
     }
 
